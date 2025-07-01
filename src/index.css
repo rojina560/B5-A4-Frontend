@@ -1,5 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Libertinus+Math&family=Meddon&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
+
+
+@theme {
+  --font-meddon: "Meddon", cursive;
+  --font-libertinus: "Libertinus", system-ui; 
+  --color-main: #471396;
+  --color-alternative: #B13BFF
+}
+
 
 @custom-variant dark (&:is(.dark *));
 
@@ -109,6 +119,7 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 }
+
 
 @layer base {
   * {
