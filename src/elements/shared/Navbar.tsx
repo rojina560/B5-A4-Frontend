@@ -28,7 +28,6 @@ export default function Navbar() {
                     <h1 className=" font-meddon text-xl md:text-3xl font-bold text-gray-800">Bookio</h1>
                 </div>
 
-                {/* Desktop Nav Links */}
                 <div className="hidden md:flex items-center gap-6 border px-4 py-2 rounded-md backdrop-blur-xl bg-white/60 shadow-lg">
                     {navLinks.map(({ to, label }) => (
                         <NavLink
@@ -47,13 +46,11 @@ export default function Navbar() {
                     ))}
                 </div>
 
-                {/* Mobile Hamburger Icon */}
                 <button onClick={toggleMenu} className="md:hidden text-3xl text-gray-700">
                     {isMenuOpen ? <HiX /> : <HiMenu />}
                 </button>
             </div>
 
-            {/* Overlay */}
             {isMenuOpen && (
                 <div
                     className="fixed inset-0 z-30 bg-black/50"
@@ -61,10 +58,10 @@ export default function Navbar() {
                 />
             )}
 
-            {/* Mobile Side Drawer */}
+
             <div
                 className={`fixed top-0 left-0 h-full w-60 bg-white z-60 shadow-lg transform transition-transform duration-300 ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
-                {/* Logo in Side Nav */}
+
                 <div className="flex items-center justify-between gap-3 px-3 sm:px-4 md:px-6 lg:px-10 xl:px-12 py-3 md:py-4  border-b">
 
                     <div className="flex items-center gap-3">
@@ -90,7 +87,7 @@ export default function Navbar() {
                             end={to === "/"}
                             onClick={closeMenu}
                             className={({ isActive }) =>
-                                `text-xs font-medium transition-colors ${isActive
+                                ` font-medium transition-colors ${isActive
                                     ? "text-main underline underline-offset-4"
                                     : "text-gray-700 hover:text-purple-800"
                                 }`
