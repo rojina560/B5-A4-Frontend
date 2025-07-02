@@ -59,7 +59,7 @@ export default function Footer() {
                             <div className="flex flex-col space-y-2">
                                 {links.map(({ to, label }) => (
                                     <Link
-                                        key={to}
+                                        key={label}
                                         to={to}
                                         className="text-sm md:text-base text-gray-700 hover:text-purple-800 hover:underline underline-offset-4 transition-all"
                                     >
