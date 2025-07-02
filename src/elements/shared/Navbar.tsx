@@ -17,7 +17,7 @@ export default function Navbar() {
     return (
         <>
             {/* Top Navbar */}
-            <div className="fixed top-0 left-0 w-full z-50 px-3 sm:px-4 md:px-6 lg:px-10 xl:px-12 py-3 md:py-4 flex justify-between items-center backdrop-blur-xs bg-white/20 rounded-b-2xl border-b-1 shadow-lg">
+            <div className="fixed top-0 left-0 w-full z-50 px-3 sm:px-4 md:px-6 lg:px-10 xl:px-12 py-3 md:py-4 flex justify-between items-center backdrop-blur-xs bg-white/80 rounded-b-2xl border-b-1 shadow-lg">
                 {/* Logo & Title */}
                 <div className="flex items-center gap-4">
                     <img

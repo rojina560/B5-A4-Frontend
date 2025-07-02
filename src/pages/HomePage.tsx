@@ -16,7 +16,7 @@ export default function HomePage() {
 
 
     const books: IBook[] = data?.data
-        ? [...data.data].reverse().slice(0, 8) // reverse then take first 8
+        ? [...data.data].reverse().slice(0, 8)
         : [];
 
 
@@ -29,8 +29,8 @@ export default function HomePage() {
             <MainContainer>
                 {/* Header */}
                 <div className="text-center my-10 px-4">
-                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-2">
-                        Recently Released Books
+                    <h1 className="text-xl md:text-3xl lg:text-4xl font-bold mb-2">
+                        Recently Released
                     </h1>
                     <h2 className="text-base md:text-lg text-gray-600">
                         Explore the latest additions to our collection
