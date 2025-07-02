@@ -14,3 +14,20 @@ export interface IBook {
     copies: number;
     available?: boolean;
 }
+
+// src/types/error.ts
+
+export interface IApiError {
+    status?: number;
+    data?: {
+        success?: boolean;
+        message?: string;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        error?: any;
+    };
+}
+
+
+export interface IModalState {
+    isAddBookModalOpen: boolean;
+}

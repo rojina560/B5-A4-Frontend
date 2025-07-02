@@ -1,11 +1,11 @@
+import { createBrowserRouter } from "react-router";
 import MainLayout from "@/layouts/MainLayout";
+import HomePage from "@/pages/HomePage";
 import AllBooksPage from "@/pages/AllBooksPage";
 import BorrowSummaryPage from "@/pages/BorrowSummaryPage";
 import ErrorPage from "@/pages/ErrorPage";
-import HomePage from "@/pages/HomePage";
-import { createBrowserRouter } from "react-router";
-
-
+import SingleBook from "@/pages/SingleBook"; // ✅ import your SingleBook page
+import AddBookPage from "@/pages/AddBookPage";
 
 const router = createBrowserRouter([
     {
@@ -19,7 +19,20 @@ const router = createBrowserRouter([
             },
             {
                 path: "books",
-                Component: AllBooksPage,
+                children: [
+                    {
+                        index: true,
+                        Component: AllBooksPage,
+                    },
+                    {
+                        path: ":id",
+                        Component: SingleBook,
+                    },
+                ],
+            },
+            {
+                path: "create-book",
+                Component: AddBookPage,
             },
             {
                 path: "borrow-summary",
@@ -28,6 +41,5 @@ const router = createBrowserRouter([
         ],
     },
 ]);
-
 
 export default router;

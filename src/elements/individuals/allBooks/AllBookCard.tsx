@@ -1,5 +1,6 @@
 import { FaEdit, FaTrash } from "react-icons/fa";
 import type { IBook } from "@/types/types";
+import { Link } from "react-router";
 
 interface BookCardProps {
     book: IBook;
@@ -63,9 +64,12 @@ export default function AllBookCard({ book }: BookCardProps) {
                         <button className="bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded-md shadow transition-transform hover:scale-105">
                             Borrow
                         </button>
-                        <button className="bg-main hover:bg-purple-800 text-white px-2 py-1 rounded-md shadow transition-transform hover:scale-105">
-                            Details
-                        </button>
+                        <Link to={`/books/${book._id}`}>
+                            <button className="bg-main hover:bg-purple-800 text-white px-2 py-1 rounded-md shadow transition-transform hover:scale-105">
+                                Details
+                            </button>
+                        </Link>
+
                     </div>
                 </div>
             </div>
