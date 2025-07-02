@@ -17,7 +17,7 @@ export default function Navbar() {
     return (
         <>
             {/* Top Navbar */}
-            <div className="fixed top-0 left-0 w-full z-50 px-3 sm:px-4 md:px-6 lg:px-10 xl:px-12 py-3 md:py-4 flex justify-between items-center border-b-1 md:border-b-0">
+            <div className="fixed top-0 left-0 w-full z-50 px-3 sm:px-4 md:px-6 lg:px-10 xl:px-12 py-3 md:py-4 flex justify-between items-center backdrop-blur-xs bg-white/20 rounded-b-2xl border-b-1 shadow-lg">
                 {/* Logo & Title */}
                 <div className="flex items-center gap-4">
                     <img
@@ -28,7 +28,7 @@ export default function Navbar() {
                     <h1 className=" font-meddon text-xl md:text-3xl font-bold text-gray-800">Bookio</h1>
                 </div>
 
-                <div className="hidden md:flex items-center gap-6 border px-4 py-2 rounded-md backdrop-blur-xl bg-white/60 shadow-lg">
+                <div className="hidden md:flex items-center gap-6 border px-4 py-2 rounded-md  shadow-lg">
                     {navLinks.map(({ to, label }) => (
                         <NavLink
                             key={to}

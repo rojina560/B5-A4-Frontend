@@ -8,7 +8,7 @@ export default function MainLayout() {
 
         <div>
             <Navbar />
-            <div className='pt-20 sm:pt-20 md:pt-24 lg:pt-28 xl:pt-32 min-h-[calc(100vh-68px)] font-libertinus'>
+            <div className='pt-20 sm:pt-20 md:pt-24 lg:pt-28 xl:pt-28 min-h-[calc(100vh-68px)] font-libertinus'>
                 <Outlet />
             </div>
             <Footer />
