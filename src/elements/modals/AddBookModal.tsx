@@ -13,6 +13,7 @@ import {
     FormField,
     FormItem,
     FormLabel,
+    FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -25,44 +26,47 @@ import {
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import type { IBook } from "@/types/types";
+import type { BookFormValues, IApiError } from "@/types/types";
 import { useAddBookMutation } from "@/redux/api/baseApi";
 import { useAppDispatch } from "@/redux/hooks";
-
 import { closeAddBookModal } from "@/redux/features/modalState/modalState";
-
-type BookFormValues = Omit<IBook, "_id">;
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
+import { useEffect } from "react";
 
 
 
 export default function AddBookModal() {
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const form = useForm<BookFormValues>();
 
     const [addBook, { data, isLoading, isError, error }] = useAddBookMutation();
 
-    console.log({ data, isLoading, isError, error })
+    console.log({ data })
 
-    // console.log({ data, isLoading, isError, error })
+    useEffect(() => {
+        if (isError && error) {
+            const errMsg = (error as IApiError)?.data?.message || "Failed to add book";
+            toast.error(errMsg);
+        }
+    }, [isError, error]);
 
     const onSubmit: SubmitHandler<BookFormValues> = async (data) => {
-
-        console.log(data)
-        const res = await addBook(data)
-
-        console.log("Book added:", res);
-
+        const res = await addBook(data).unwrap();
+        toast.success(res.message || "Book added successfully!");
         dispatch(closeAddBookModal());
-        form.reset()
-
+        form.reset();
+        navigate("/books");
     };
 
     return (
-
         <DialogContent className="sm:max-w-[600px]">
-            <DialogHeader >
+            <DialogHeader>
                 <DialogTitle className="text-center">Add Book</DialogTitle>
-                <DialogDescription className="text-center">Fill out the form to add a new book.</DialogDescription>
+                <DialogDescription className="text-center">
+                    Fill out the form to add a new book.
+                </DialogDescription>
             </DialogHeader>
 
             <Form {...form}>
@@ -71,12 +75,14 @@ export default function AddBookModal() {
                     <FormField
                         control={form.control}
                         name="title"
+                        rules={{ required: "Title is required" }}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Title</FormLabel>
                                 <FormControl>
                                     <Input placeholder="Enter Title" {...field} value={field.value || ""} />
                                 </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -85,12 +91,14 @@ export default function AddBookModal() {
                     <FormField
                         control={form.control}
                         name="author"
+                        rules={{ required: "Author is required" }}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Author</FormLabel>
                                 <FormControl>
                                     <Input placeholder="Enter Author Name" {...field} value={field.value || ""} />
                                 </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -99,12 +107,14 @@ export default function AddBookModal() {
                     <FormField
                         control={form.control}
                         name="isbn"
+                        rules={{ required: "ISBN is required" }}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>ISBN</FormLabel>
                                 <FormControl>
                                     <Input placeholder="Enter an ISBN Number" {...field} value={field.value || ""} />
                                 </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -113,6 +123,7 @@ export default function AddBookModal() {
                     <FormField
                         control={form.control}
                         name="genre"
+                        rules={{ required: "Genre is required" }}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel className="">Genre</FormLabel>
@@ -131,9 +142,11 @@ export default function AddBookModal() {
                                         <SelectItem value="FANTASY">Fantasy</SelectItem>
                                     </SelectContent>
                                 </Select>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
+
                     {/* Description */}
                     <FormField
                         control={form.control}
@@ -144,6 +157,7 @@ export default function AddBookModal() {
                                 <FormControl>
                                     <Textarea placeholder="Book description..." {...field} value={field.value || ""} />
                                 </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -152,6 +166,10 @@ export default function AddBookModal() {
                     <FormField
                         control={form.control}
                         name="copies"
+                        rules={{
+                            required: "Copies is required",
+                            min: { value: 0, message: "Copies cannot be negative" },
+                        }}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Copies</FormLabel>
@@ -164,10 +182,10 @@ export default function AddBookModal() {
                                         onChange={(e) => field.onChange(Number(e.target.value))}
                                     />
                                 </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
-
 
                     {/* Available */}
                     <FormField
@@ -185,6 +203,7 @@ export default function AddBookModal() {
                                 <FormLabel className="text-sm font-medium leading-none">
                                     Available
                                 </FormLabel>
+
                             </FormItem>
                         )}
                     />
@@ -196,8 +215,39 @@ export default function AddBookModal() {
                                 Cancel
                             </Button>
                         </DialogClose>
-                        <Button className=" flex items-center gap-2  bg-main hover:bg-purple-800 transition rounded-lg text-white font-semibold shadow-lg">
-                            Add Book
+
+                        <Button
+                            type="submit"
+                            disabled={isLoading}
+                            className="flex items-center gap-2 bg-main hover:bg-purple-800 transition rounded-lg text-white font-semibold shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
+                        >
+                            {isLoading ? (
+                                <>
+                                    <svg
+                                        className="animate-spin h-4 w-4 text-white"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <circle
+                                            className="opacity-25"
+                                            cx="12"
+                                            cy="12"
+                                            r="10"
+                                            stroke="currentColor"
+                                            strokeWidth="4"
+                                        ></circle>
+                                        <path
+                                            className="opacity-75"
+                                            fill="currentColor"
+                                            d="M4 12a8 8 0 018-8v8H4z"
+                                        ></path>
+                                    </svg>
+                                    <span>Adding...</span>
+                                </>
+                            ) : (
+                                "Add Book"
+                            )}
                         </Button>
                     </DialogFooter>
                 </form>

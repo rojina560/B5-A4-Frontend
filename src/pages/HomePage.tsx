@@ -8,7 +8,11 @@ import { BounceLoader } from "react-spinners";
 import HomeBookCard from "@/elements/individuals/home/HomeBookCard";
 
 export default function HomePage() {
-    const { data, isLoading, isError, error } = useGetAllBooksQuery(undefined);
+    const { data, isLoading, isError, error } = useGetAllBooksQuery(undefined, {
+        pollingInterval: 3000,
+        refetchOnFocus: true,
+        refetchOnMountOrArgChange: true,
+    });
 
 
     const books: IBook[] = data?.data

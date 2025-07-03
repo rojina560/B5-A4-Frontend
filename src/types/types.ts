@@ -31,3 +31,5 @@ export interface IApiError {
 export interface IModalState {
     isAddBookModalOpen: boolean;
 }
+
+export type BookFormValues = Omit<IBook, "_id">;
