@@ -63,6 +63,10 @@ export default function UpdateBookModal({ book }: IBookCardProps) {
             formData.available = false;
         }
 
+        if (formData.copies > 0) {
+            formData.available = true;
+        }
+
         const res = await updateBook({ id: book._id, ...formData }).unwrap();
         toast.success(res.message || "Book updated successfully");
         navigate("/books");
