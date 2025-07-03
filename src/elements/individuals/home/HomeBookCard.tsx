@@ -1,11 +1,9 @@
 import { Link } from "react-router";
-import type { IBook } from "@/types/types";
+import type { IBookCardProps } from "@/types/types";
 
-interface BookCardProps {
-    book: IBook;
-}
 
-export default function HomeBookCard({ book }: BookCardProps) {
+
+export default function HomeBookCard({ book }: IBookCardProps) {
     return (
         <div className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow flex flex-col">
             <div className="p-4 flex flex-col flex-grow justify-between">

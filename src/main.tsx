@@ -17,12 +17,10 @@ createRoot(document.getElementById('root')!).render(
         toastOptions={{
           style: {
             fontSize: "16px",
-            borderLeft: "4px solid white",
             background: "#9654f8",
             color: "#fff",
-            padding: "16px",
           },
-          className: "shadow-lg rounded-lg",
+          className: "shadow-lg rounded-lg text-center flex justify-center item center",
         }}
       />
       <RouterProvider router={router} />

@@ -1,12 +1,13 @@
 import { FaEdit, FaTrash } from "react-icons/fa";
-import type { IBook } from "@/types/types";
+import type { IBookCardProps } from "@/types/types";
 import { Link } from "react-router";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import DeleteBookModal from "@/elements/modals/DeleteBookModal";
 
-interface BookCardProps {
-    book: IBook;
-}
 
-export default function AllBookCard({ book }: BookCardProps) {
+
+
+export default function AllBookCard({ book }: IBookCardProps) {
     return (
         <div className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow flex flex-col">
             <div className="p-4 flex flex-col flex-grow justify-between">
@@ -51,12 +52,18 @@ export default function AllBookCard({ book }: BookCardProps) {
                         >
                             <FaEdit size={18} />
                         </button>
-                        <button
-                            aria-label="Delete book"
-                            className="text-red-600 hover:text-red-700 transition-transform hover:scale-110"
-                        >
-                            <FaTrash size={18} />
-                        </button>
+                        {/* delete */}
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                <button
+                                    aria-label="Delete book"
+                                    className="text-red-600 hover:text-red-700 transition-transform hover:scale-110"
+                                >
+                                    <FaTrash size={18} />
+                                </button>
+                            </DialogTrigger>
+                            <DeleteBookModal bookId={book._id} />
+                        </Dialog>
                     </div>
 
                     {/* Right side: Borrow & View */}

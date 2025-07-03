@@ -2,7 +2,7 @@ import { useGetSingleBookQuery } from "@/redux/api/baseApi";
 import type { IApiError } from "@/types/types";
 import { useParams, Link } from "react-router";
 import { BounceLoader } from "react-spinners";
-import { FaEdit, FaTrash } from "react-icons/fa";
+
 
 export default function SingleBook() {
     const { id } = useParams();
@@ -61,21 +61,7 @@ export default function SingleBook() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row justify-between gap-4 mt-8">
-                    <div className="flex gap-4 justify-center sm:justify-start">
-                        <button
-                            aria-label="Edit book"
-                            className="text-yellow-500 hover:text-yellow-600 transition-transform hover:scale-110"
-                        >
-                            <FaEdit size={30} />
-                        </button>
-                        <button
-                            aria-label="Delete book"
-                            className="text-red-600 hover:text-red-700 transition-transform hover:scale-110"
-                        >
-                            <FaTrash size={30} />
-                        </button>
-                    </div>
+                <div className="flex flex-col sm:flex-row justify-center mt-8">
                     <div className="flex gap-4 justify-center sm:justify-end">
                         <Link to="/borrow-summary">
                             <button className="px-3 py-2 rounded-md bg-main text-white font-semibold hover:bg-purple-800 transition">

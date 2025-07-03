@@ -54,7 +54,7 @@ export default function AddBookModal() {
 
     const onSubmit: SubmitHandler<BookFormValues> = async (data) => {
         const res = await addBook(data).unwrap();
-        toast.success(res.message || "Book added successfully!");
+        toast.success(res.message);
         dispatch(closeAddBookModal());
         form.reset();
         navigate("/books");

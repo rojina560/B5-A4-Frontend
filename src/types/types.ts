@@ -33,3 +33,11 @@ export interface IModalState {
 }
 
 export type BookFormValues = Omit<IBook, "_id">;
+
+export type DeleteBookModalProps = {
+    bookId: string;
+};
+
+export interface IBookCardProps {
+    book: IBook;
+}
