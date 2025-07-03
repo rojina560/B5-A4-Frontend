@@ -3,11 +3,14 @@ import type { IBookCardProps } from "@/types/types";
 import { Link } from "react-router";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import DeleteBookModal from "@/elements/modals/DeleteBookModal";
+import UpdateBookModal from "@/elements/modals/UpdateBookModal";
+
 
 
 
 
 export default function AllBookCard({ book }: IBookCardProps) {
+
     return (
         <div className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow flex flex-col">
             <div className="p-4 flex flex-col flex-grow justify-between">
@@ -46,12 +49,20 @@ export default function AllBookCard({ book }: IBookCardProps) {
                 <div className="flex justify-between items-center space-x-4">
                     {/* Left side: Edit & Delete Icons */}
                     <div className="flex space-x-3">
-                        <button
-                            aria-label="Edit book"
-                            className="text-yellow-500 hover:text-yellow-600 transition-transform hover:scale-110"
-                        >
-                            <FaEdit size={18} />
-                        </button>
+
+                        <div className="flex space-x-3">
+                            <Dialog>
+                                <DialogTrigger asChild>
+                                    <button
+                                        aria-label="Edit book"
+                                        className="text-yellow-500 hover:text-yellow-600 transition-transform hover:scale-110"
+                                    >
+                                        <FaEdit size={22} />
+                                    </button>
+                                </DialogTrigger>
+                                <UpdateBookModal book={book} />
+                            </Dialog>
+                        </div>
                         {/* delete */}
                         <Dialog>
                             <DialogTrigger asChild>

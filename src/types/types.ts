@@ -15,7 +15,7 @@ export interface IBook {
     available?: boolean;
 }
 
-// src/types/error.ts
+
 
 export interface IApiError {
     status?: number;
