@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import DeleteBookModal from "@/elements/modals/DeleteBookModal";
 import UpdateBookModal from "@/elements/modals/UpdateBookModal";
+import BorrowModal from "@/elements/modals/BorrowModal";
 
 
 
@@ -79,9 +80,15 @@ export default function AllBookCard({ book }: IBookCardProps) {
 
                     {/* Right side: Borrow & View */}
                     <div className="flex space-x-2">
-                        <button className="bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded-md shadow transition-transform hover:scale-105">
-                            Borrow
-                        </button>
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                <button className="bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded-md shadow transition-transform hover:scale-105">
+                                    Borrow
+                                </button>
+                            </DialogTrigger>
+                            <BorrowModal book={book} />
+                        </Dialog>
+
                         <Link to={`/books/${book._id}`}>
                             <button className="bg-main hover:bg-purple-800 text-white px-2 py-1 rounded-md shadow transition-transform hover:scale-105">
                                 Details

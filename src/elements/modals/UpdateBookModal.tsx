@@ -24,7 +24,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { useForm, useFormState, type SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import type { BookFormValues, IApiError, IBookCardProps } from "@/types/types";
 import { useUpdateBookMutation } from "@/redux/api/baseApi";
 import { useNavigate } from "react-router";
@@ -42,18 +42,26 @@ export default function UpdateBookModal({ book }: IBookCardProps) {
             genre: book.genre,
             description: book.description,
             copies: book.copies,
-            available: book.available,
+            available: book.available ?? true,
         },
     });
 
-    const { control, handleSubmit } = form;
-    const { isDirty } = useFormState({ control });
+    const { control, handleSubmit, watch } = form;
+
+    const watchedValues = watch();
+
+    const hasChanged = Object.keys(watchedValues).some((key) => {
+        const typedKey = key as keyof BookFormValues;
+        return watchedValues[typedKey] !== book[typedKey];
+    });
+
+    // console.log(watchedValues)
 
     const [updateBook, { isLoading, isError, error }] = useUpdateBookMutation();
 
     useEffect(() => {
         if (isError && error) {
-            const errMsg = (error as IApiError)?.data?.message || "Failed to Update book";
+            const errMsg = (error as IApiError)?.data?.message || "Failed to update book";
             toast.error(errMsg);
         }
     }, [isError, error]);
@@ -61,9 +69,7 @@ export default function UpdateBookModal({ book }: IBookCardProps) {
     const onSubmit: SubmitHandler<BookFormValues> = async (formData) => {
         if (formData.copies === 0) {
             formData.available = false;
-        }
-
-        if (formData.copies > 0) {
+        } else {
             formData.available = true;
         }
 
@@ -175,8 +181,7 @@ export default function UpdateBookModal({ book }: IBookCardProps) {
                                     <Input
                                         type="number"
                                         min={0}
-                                        placeholder="0"
-                                        value={field.value ?? ""}
+                                        value={field.value}
                                         onChange={(e) => field.onChange(Number(e.target.value))}
                                     />
                                 </FormControl>
@@ -191,10 +196,11 @@ export default function UpdateBookModal({ book }: IBookCardProps) {
                                 Cancel
                             </Button>
                         </DialogClose>
+
                         <DialogClose asChild>
                             <Button
                                 type="submit"
-                                disabled={isLoading || !isDirty}
+                                disabled={isLoading || !hasChanged}
                                 className="flex items-center gap-2 bg-main hover:bg-purple-800 transition rounded-lg text-white font-semibold shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
                             >
                                 {isLoading ? (

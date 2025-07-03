@@ -41,3 +41,16 @@ export type DeleteBookModalProps = {
 export interface IBookCardProps {
     book: IBook;
 }
+
+
+
+export interface IBorrowBooks {
+    book: string;
+    quantity: number;
+    dueDate: Date;
+}
+
+export interface BorrowFormValues {
+    quantity: number;
+    dueDate: Date;
+}
