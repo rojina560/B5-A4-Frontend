@@ -54,3 +54,11 @@ export interface BorrowFormValues {
     quantity: number;
     dueDate: Date;
 }
+
+export interface BorrowSummaryEntry {
+    totalQuantity: number;
+    book: {
+        title: string;
+        isbn: string;
+    };
+}
