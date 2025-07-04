@@ -1,3 +1,5 @@
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import BorrowModal from "@/elements/modals/BorrowModal";
 import { useGetSingleBookQuery } from "@/redux/api/baseApi";
 import type { IApiError } from "@/types/types";
 import { useParams, Link } from "react-router";
@@ -63,11 +65,14 @@ export default function SingleBook() {
                 {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row justify-center mt-8">
                     <div className="flex gap-4 justify-center sm:justify-end">
-                        <Link to="/borrow-summary">
-                            <button className="px-3 py-2 rounded-md bg-main text-white font-semibold hover:bg-purple-800 transition">
-                                Borrow
-                            </button>
-                        </Link>
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                <button className="px-3 py-2 rounded-md bg-main text-white font-semibold hover:bg-purple-800 transition">
+                                    Borrow
+                                </button>
+                            </DialogTrigger>
+                            <BorrowModal book={book} />
+                        </Dialog>
                         <Link to="/books">
                             <button className="px-3 py-2 rounded-md bg-gray-300 text-gray-700 font-semibold hover:bg-gray-400 transition">
                                 Back to List
