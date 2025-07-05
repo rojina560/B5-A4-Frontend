@@ -4,6 +4,10 @@ This is the frontend of a minimal Library Management System built with React, Ty
 
 Forms are handled with React Hook Form, and data fetching is managed through RTK Query for efficient, scalable state management. Sonner is used for lightweight and customizable toast notifications, providing real-time feedback on user actions. The interface is fully responsive and designed to be clean, maintainable. 
 
+#### Frontend Live Link :  [Frontend-Live](https://b5-a4-backend-sazid.vercel.app)
+#### Backend Live Link :  [Backend-Live](https://b5-a4-backend-sazid.vercel.app)
+#### Backend Repository Link :  [Backend-Repository](https://b5-a4-backend-sazid.vercel.app)
+
 ## Library Management System - Features Overview
 
 ### Home Page
