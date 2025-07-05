@@ -59,7 +59,7 @@ export default function AddBookPage() {
 
             {/* All Books Section */}
             <div className="text-center my-6">
-                <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-2">All Added Books</h2>
+                <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-2">Recent Added Books</h2>
                 <p className="text-base md:text-lg text-gray-600">Below is the list of all books in the collection</p>
             </div>
 

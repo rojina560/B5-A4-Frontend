@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 import type { IBookCardProps } from "@/types/types";
+import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
+import BorrowModal from "@/elements/modals/BorrowModal";
 
 
 
@@ -37,11 +39,23 @@ export default function HomeBookCard({ book }: IBookCardProps) {
                         {book.available ? "Available" : "Unavailable"}
                     </p>
                 </div>
-                <Link to={`/books/${book._id}`}>
-                    <button className="bg-main hover:bg-purple-800 text-white px-5 py-2 sm:py-2 w-full mt-4 rounded-md shadow-lg transition-transform hover:scale-101">
-                        View Book
-                    </button>
-                </Link>
+                <div className="flex justify-between items-center space-x-2 mt-3">
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <button className="bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded-md shadow transition-transform hover:scale-105">
+                                Borrow
+                            </button>
+                        </DialogTrigger>
+                        <BorrowModal book={book} />
+                    </Dialog>
+
+                    <Link to={`/books/${book._id}`}>
+                        <button className="bg-main hover:bg-purple-800 text-white px-2 py-1 rounded-md shadow transition-transform hover:scale-105">
+                            Details
+                        </button>
+                    </Link>
+
+                </div>
             </div>
         </div>
     );

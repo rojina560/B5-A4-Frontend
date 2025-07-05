@@ -39,29 +39,29 @@ export default function BorrowSummaryPage() {
                     <div className="hidden md:block overflow-x-auto rounded-lg border border-gray-300 shadow-sm">
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-main/5">
-                                <tr>
-                                    <th className="px-6 py-3 text-left text-sm font-semibold text-main uppercase ">
+                                <tr className='text-sm'>
+                                    <th className="px-6 py-3 text-left  font-semibold text-main uppercase ">
                                         Title
                                     </th>
-                                    <th className="px-6 py-3 text-left text-sm font-semibold text-main uppercase ">
+                                    <th className="px-6 py-3 text-left  font-semibold text-main uppercase ">
                                         ISBN
                                     </th>
-                                    <th className="px-6 py-3 text-right text-sm font-semibold text-main uppercase">
+                                    <th className="px-6 py-3 text-right font-semibold text-main uppercase">
                                         Total Borrowed
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="bg-white divide-y divide-gray-100">
+                            <tbody className="bg-white divide-y divide-gray-100 text-sm">
                                 {summaryList.map((entry) => (
                                     <tr
                                         key={entry.book.isbn}
                                         className="hover:bg-gray-50 transition-colors cursor-pointer"
                                     >
-                                        <td className="px-6 py-4 whitespace-nowrap font-medium">
+                                        <td className="px-6 py-4 whitespace-nowrap ">
                                             {entry.book.title}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap ">{entry.book.isbn}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-right font-semibold ">
+                                        <td className="px-6 py-4 whitespace-nowrap text-right  ">
                                             {entry.totalQuantity}
                                         </td>
                                     </tr>
