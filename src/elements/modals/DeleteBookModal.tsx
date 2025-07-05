@@ -11,8 +11,10 @@ import { useDeleteBookMutation } from "@/redux/api/baseApi";
 import { toast } from "sonner";
 import type { DeleteBookModalProps, IApiError } from "@/types/types";
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 export default function DeleteBookModal({ bookId }: DeleteBookModalProps) {
+    const navigate = useNavigate();
     const [deleteBook, { isLoading, isError, error }] = useDeleteBookMutation();
 
     useEffect(() => {
@@ -25,6 +27,7 @@ export default function DeleteBookModal({ bookId }: DeleteBookModalProps) {
     const handleDelete = async () => {
         const res = await deleteBook(bookId).unwrap();
         toast.success(res.message);
+        navigate("/books");
     }
     return (
         <DialogContent className="sm:max-w-[525px]">

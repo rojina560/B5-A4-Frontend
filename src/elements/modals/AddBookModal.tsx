@@ -41,6 +41,8 @@ export default function AddBookModal() {
     const dispatch = useAppDispatch();
     const form = useForm<BookFormValues>();
 
+    const copies = form.watch("copies");
+
     const [addBook, { data, isLoading, isError, error }] = useAddBookMutation();
 
     console.log({ data })
@@ -53,6 +55,11 @@ export default function AddBookModal() {
     }, [isError, error]);
 
     const onSubmit: SubmitHandler<BookFormValues> = async (data) => {
+        if (data.copies === 0) {
+            data.available = false;
+        } else {
+            data.available = true;
+        }
         const res = await addBook(data).unwrap();
         toast.success(res.message);
         dispatch(closeAddBookModal());
@@ -168,7 +175,7 @@ export default function AddBookModal() {
                         name="copies"
                         rules={{
                             required: "Copies is required",
-                            min: { value: 0, message: "Copies cannot be negative" },
+                            min: { value: 0, message: "Copies can nOt Be Negative" },
                         }}
                         render={({ field }) => (
                             <FormItem>
@@ -196,7 +203,8 @@ export default function AddBookModal() {
                                 <FormControl>
                                     <Checkbox
                                         className="ml-1"
-                                        checked={field.value ?? false}
+                                        disabled={copies < 1}
+                                        checked={copies > 0 ? true : field.value}
                                         onCheckedChange={field.onChange}
                                     />
                                 </FormControl>

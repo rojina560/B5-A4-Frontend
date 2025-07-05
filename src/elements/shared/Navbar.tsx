@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 
@@ -20,14 +20,17 @@ export default function Navbar() {
             {/* Top Navbar */}
             <div className="fixed top-0 left-0 w-full z-50 px-3 sm:px-4 md:px-6 lg:px-10 xl:px-12 py-3 md:py-4 flex justify-between items-center backdrop-blur-xs bg-white/80 rounded-b-2xl border-b-1 shadow-lg">
                 {/* Logo & Title */}
-                <div className="flex items-center gap-4">
-                    <img
-                        className="h-12 w-12 md:h-16 md:w-16 rounded-full object-cover"
-                        src="/logo.jpg"
-                        alt="Logo"
-                    />
-                    <h1 className=" font-meddon text-xl md:text-3xl font-bold text-gray-800">Bookio</h1>
-                </div>
+
+                <Link to={"/"}>
+                    <div className="flex items-center gap-4">
+                        <img
+                            className="h-12 w-12 md:h-16 md:w-16 rounded-full object-cover"
+                            src="/logo.jpg"
+                            alt="Logo"
+                        />
+                        <h1 className=" font-meddon text-xl md:text-3xl font-bold text-gray-800">Bookio</h1>
+                    </div>
+                </Link>
 
                 <div className="hidden md:flex items-center gap-6 border px-4 py-2 rounded-md  shadow-lg">
                     {navLinks.map(({ to, label }) => (
@@ -65,14 +68,16 @@ export default function Navbar() {
 
                 <div className="flex items-center justify-between gap-3 px-3 sm:px-4 md:px-6 lg:px-10 xl:px-12 py-3 md:py-4  border-b">
 
-                    <div className="flex items-center gap-3">
-                        <img
-                            className="h-10 w-10 rounded-full object-cover"
-                            src="/logo.jpg"
-                            alt="Logo"
-                        />
-                        <h2 className="font-meddon text-xl font-bold text-gray-800">Bookio</h2>
-                    </div>
+                    <Link to={"/"}>
+                        <div className="flex items-center gap-3">
+                            <img
+                                className="h-10 w-10 rounded-full object-cover"
+                                src="/logo.jpg"
+                                alt="Logo"
+                            />
+                            <h2 className="font-meddon text-xl font-bold text-gray-800">Bookio</h2>
+                        </div>
+                    </Link>
 
                     <button onClick={closeMenu} className="text-2xl text-gray-700">
                         <HiX />

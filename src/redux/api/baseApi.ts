@@ -12,6 +12,7 @@ export const bookApi = createApi({
 
         getSingleBook: builder.query({
             query: (id: string) => `/books/${id}`,
+            providesTags: ["Book"],
         }),
 
         addBook: builder.mutation({

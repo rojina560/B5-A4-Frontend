@@ -1,7 +1,10 @@
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import BorrowModal from "@/elements/modals/BorrowModal";
+import DeleteBookModal from "@/elements/modals/DeleteBookModal";
+import UpdateBookModal from "@/elements/modals/UpdateBookModal";
 import { useGetSingleBookQuery } from "@/redux/api/baseApi";
 import type { IApiError } from "@/types/types";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import { useParams, Link } from "react-router";
 import { BounceLoader } from "react-spinners";
 
@@ -50,7 +53,7 @@ export default function SingleBook() {
                         <p className="mt-2"><span className="font-semibold">Genre:</span> {book.genre}</p>
                         <p className="mt-2"><span className="font-semibold">Copies:</span> {book.copies}</p>
                         <p className={`mt-2 ${book.available ? "text-green-600" : "text-red-500"}`}>
-                            <span className="font-semibold text-black">Status:</span> {book.available ? "Available " : "Not Available"}
+                            <span className="font-semibold text-black">Status:</span> {book.available ? "Available " : "Unavailable"}
                         </p>
                     </div>
 
@@ -63,7 +66,7 @@ export default function SingleBook() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row justify-center mt-8">
+                {/* <div className="flex flex-col sm:flex-row justify-center mt-8">
                     <div className="flex gap-4 justify-center sm:justify-end">
                         <Dialog>
                             <DialogTrigger asChild>
@@ -79,7 +82,55 @@ export default function SingleBook() {
                             </button>
                         </Link>
                     </div>
+                </div> */}
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-8 gap-4 flex-wrap">
+                    {/* Edit & Delete */}
+                    <div className="flex justify-center sm:justify-start gap-4">
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                <button
+                                    aria-label="Edit book"
+                                    className="text-yellow-500 hover:text-yellow-600 transition-transform hover:scale-110"
+                                >
+                                    <FaEdit size={22} />
+                                </button>
+                            </DialogTrigger>
+                            <UpdateBookModal book={book} />
+                        </Dialog>
+
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                <button
+                                    aria-label="Delete book"
+                                    className="text-red-600 hover:text-red-700 transition-transform hover:scale-110"
+                                >
+                                    <FaTrash size={18} />
+                                </button>
+                            </DialogTrigger>
+                            <DeleteBookModal bookId={book._id} />
+                        </Dialog>
+                    </div>
+
+                    {/* Borrow & Back */}
+                    <div className="flex justify-center sm:justify-end gap-4 flex-wrap">
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                <button className="px-4 py-2 rounded-md bg-main text-white font-semibold hover:bg-purple-800 transition">
+                                    Borrow
+                                </button>
+                            </DialogTrigger>
+                            <BorrowModal book={book} />
+                        </Dialog>
+
+                        <Link to="/books">
+                            <button className="px-4 py-2 rounded-md bg-gray-300 text-gray-700 font-semibold hover:bg-gray-400 transition">
+                                Back to List
+                            </button>
+                        </Link>
+                    </div>
                 </div>
+
             </div>
         </div>
     );

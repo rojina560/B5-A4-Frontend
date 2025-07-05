@@ -84,7 +84,7 @@ export default function BorrowModal({ book }: IBookCardProps) {
                         }}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Quantity</FormLabel>
+                                <FormLabel>Available Quantity : {book.copies}</FormLabel>
                                 <FormControl>
                                     <Input type="number"
                                         min={1}

@@ -42,7 +42,7 @@ export default function AllBookCard({ book }: IBookCardProps) {
                         className={`text-xs md:text-sm font-semibold ${book.available ? "text-green-600" : "text-red-500"
                             }`}
                     >
-                        {book.available ? "Available" : "Not Available"}
+                        {book.available ? "Available" : "Unavailable"}
                     </p>
                 </div>
 
