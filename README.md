@@ -1,19 +1,19 @@
 # Library Management System - Frontend 
 
-This is the frontend of a minimal Library Management System built with React, TypeScript, Redux Toolkit Query, and Tailwind CSS, featuring elegant UI components from Shadcn UI. All core actions—add, edit, delete, and borrow—are implemented using responsive modals, creating a smooth and intuitive single-page experience.
+This is the frontend of a minimal Library Management System built with React, TypeScript, Redux Toolkit Query, and Tailwind CSS, featuring elegant UI components from Shadcn UI. All core actions add, edit, delete, and borrow are implemented using responsive modals, creating a smooth and intuitive single-page experience.
 
 Forms are handled with React Hook Form, and data fetching is managed through RTK Query for efficient, scalable state management. Sonner is used for lightweight and customizable toast notifications, providing real-time feedback on user actions. The interface is fully responsive and designed to be clean, maintainable. 
 
-# Library Management System - Features Overview
+## Library Management System - Features Overview
 
-## Home Page
+### Home Page
 - Displays a **banner** and a **button** redirecting to the **All Books** page.
 - Showcases **recently added books**.
 - Clicking **“View Details”** on a book redirects to the **Book Details** page.
 
 ---
 
-## All Books Page
+### All Books Page
 - Displays **all books** in card format.
 - Books are shown in **descending order (most recent first)**.
 - Implements **pagination** (12 books per page).
@@ -26,7 +26,7 @@ Forms are handled with React Hook Form, and data fetching is managed through RTK
 
 ---
 
-## Add Book Page
+### Add Book Page
 - Displays a modal form upon clicking **Add**.
 - Form validations:
   - All fields are **required** except `description` and `available` checkbox.
@@ -39,7 +39,7 @@ Forms are handled with React Hook Form, and data fetching is managed through RTK
 
 ---
 
-## Delete Book Modal
+### Delete Book Modal
 - Triggered by clicking the **Delete** button.
 - Displays a confirmation modal.
 - Upon confirmation:
@@ -112,7 +112,7 @@ npm run dev
 ```
 
 
-### Folder Structure 
+## Folder Structure 
 ```
 ├─ .gitignore
 ├─ README.md
