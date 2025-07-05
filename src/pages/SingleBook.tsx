@@ -116,7 +116,7 @@ export default function SingleBook() {
                     <div className="flex justify-center sm:justify-end gap-4 flex-wrap">
                         <Dialog>
                             <DialogTrigger asChild>
-                                <button className="px-4 py-2 rounded-md bg-main text-white font-semibold hover:bg-purple-800 transition">
+                                <button className="bg-main hover:bg-purple-800 text-white px-2 py-1 rounded-md shadow transition-transform hover:scale-105">
                                     Borrow
                                 </button>
                             </DialogTrigger>
@@ -124,7 +124,7 @@ export default function SingleBook() {
                         </Dialog>
 
                         <Link to="/books">
-                            <button className="px-4 py-2 rounded-md bg-gray-300 text-gray-700 font-semibold hover:bg-gray-400 transition">
+                            <button className="px-2 py-1 rounded-md bg-gray-300 text-gray-700 font-semibold hover:bg-gray-400 transition">
                                 Back to List
                             </button>
                         </Link>

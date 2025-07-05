@@ -175,7 +175,7 @@ export default function AddBookModal() {
                         name="copies"
                         rules={{
                             required: "Copies is required",
-                            min: { value: 0, message: "Copies can nOt Be Negative" },
+                            min: { value: 0, message: "Copies can not Be Negative" },
                         }}
                         render={({ field }) => (
                             <FormItem>
@@ -184,7 +184,7 @@ export default function AddBookModal() {
                                     <Input
                                         type="number"
                                         min={0}
-                                        placeholder="0"
+                                        placeholder="Enter Available Copies"
                                         value={field.value ?? ""}
                                         onChange={(e) => field.onChange(Number(e.target.value))}
                                     />

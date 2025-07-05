@@ -35,6 +35,7 @@ export default function UpdateBookModal({ book }: IBookCardProps) {
     const navigate = useNavigate();
 
     const form = useForm<BookFormValues>({
+        mode: "onChange",
         defaultValues: {
             title: book.title,
             author: book.author,
@@ -46,7 +47,8 @@ export default function UpdateBookModal({ book }: IBookCardProps) {
         },
     });
 
-    const { control, handleSubmit, watch } = form;
+    const { control, handleSubmit, watch, formState } = form;
+    const { isValid } = formState;
 
     const watchedValues = watch();
 
@@ -55,24 +57,18 @@ export default function UpdateBookModal({ book }: IBookCardProps) {
         return watchedValues[typedKey] !== book[typedKey];
     });
 
-    // console.log(watchedValues)
-
     const [updateBook, { isLoading, isError, error }] = useUpdateBookMutation();
 
     useEffect(() => {
         if (isError && error) {
-            const errMsg = (error as IApiError)?.data?.message || "Failed to update book";
+            const errMsg =
+                (error as IApiError)?.data?.message || "Failed to update book";
             toast.error(errMsg);
         }
     }, [isError, error]);
 
     const onSubmit: SubmitHandler<BookFormValues> = async (formData) => {
-        if (formData.copies === 0) {
-            formData.available = false;
-        } else {
-            formData.available = true;
-        }
-
+        formData.available = formData.copies > 0;
         const res = await updateBook({ id: book._id, ...formData }).unwrap();
         toast.success(res.message || "Book updated successfully");
         navigate("/books");
@@ -89,9 +85,11 @@ export default function UpdateBookModal({ book }: IBookCardProps) {
 
             <Form {...form}>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+                    {/* Title */}
                     <FormField
                         control={control}
                         name="title"
+                        rules={{ required: "Title is required" }}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Title</FormLabel>
@@ -103,9 +101,11 @@ export default function UpdateBookModal({ book }: IBookCardProps) {
                         )}
                     />
 
+                    {/* Author */}
                     <FormField
                         control={control}
                         name="author"
+                        rules={{ required: "Author is required" }}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Author</FormLabel>
@@ -117,9 +117,11 @@ export default function UpdateBookModal({ book }: IBookCardProps) {
                         )}
                     />
 
+                    {/* ISBN */}
                     <FormField
                         control={control}
                         name="isbn"
+                        rules={{ required: "ISBN is required" }}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>ISBN</FormLabel>
@@ -131,9 +133,11 @@ export default function UpdateBookModal({ book }: IBookCardProps) {
                         )}
                     />
 
+                    {/* Genre */}
                     <FormField
                         control={control}
                         name="genre"
+                        rules={{ required: "Genre is required" }}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Genre</FormLabel>
@@ -157,6 +161,7 @@ export default function UpdateBookModal({ book }: IBookCardProps) {
                         )}
                     />
 
+                    {/* Description */}
                     <FormField
                         control={control}
                         name="description"
@@ -171,9 +176,14 @@ export default function UpdateBookModal({ book }: IBookCardProps) {
                         )}
                     />
 
+                    {/* Copies */}
                     <FormField
                         control={control}
                         name="copies"
+                        rules={{
+                            required: "Copies is required",
+                            min: { value: 0, message: "Copies cannot be negative" },
+                        }}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Copies</FormLabel>
@@ -190,6 +200,7 @@ export default function UpdateBookModal({ book }: IBookCardProps) {
                         )}
                     />
 
+                    {/* Buttons */}
                     <DialogFooter className="mt-2">
                         <DialogClose asChild>
                             <Button variant="outline" type="button">
@@ -197,10 +208,10 @@ export default function UpdateBookModal({ book }: IBookCardProps) {
                             </Button>
                         </DialogClose>
 
-                        <DialogClose asChild>
+                        <DialogClose disabled={isLoading || !hasChanged || !isValid}>
                             <Button
                                 type="submit"
-                                disabled={isLoading || !hasChanged}
+                                disabled={isLoading || !hasChanged || !isValid}
                                 className="flex items-center gap-2 bg-main hover:bg-purple-800 transition rounded-lg text-white font-semibold shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
                             >
                                 {isLoading ? (

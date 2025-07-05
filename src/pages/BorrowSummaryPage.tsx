@@ -77,11 +77,11 @@ export default function BorrowSummaryPage() {
                                 key={entry.book.isbn}
                                 className="border border-gray-300 rounded-lg p-5 shadow hover:shadow-lg transition-shadow bg-white"
                             >
-                                <h2 className="text-lg font-semibold text-purple-700 truncate">{entry.book.title}</h2>
-                                <p className="text-gray-600 mt-1 truncate">
-                                    <span className="font-semibold">ISBN:</span> {entry.book.isbn}
+                                <h2 className="text-sm font-semibold text-purple-700 truncate">{entry.book.title}</h2>
+                                <p className="text-sm mt-1 truncate">
+                                    <span className="">ISBN:</span> {entry.book.isbn}
                                 </p>
-                                <p className="text-right font-bold text-gray-900 text-xl mt-3">
+                                <p className="text-right font-bold text-gray-900  mt-3">
                                     {entry.totalQuantity}
                                 </p>
                             </div>
