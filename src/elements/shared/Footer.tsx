@@ -43,10 +43,10 @@ export default function Footer() {
                 <div className="flex flex-col items-center gap-4">
                     <img
                         className="h-12 w-12 md:h-16 md:w-16 rounded-full object-cover"
-                        src="/logo.jpg"
+                        src="/book-logo.jpeg"
                         alt="Logo"
                     />
-                    <h1 className="font-meddon text-2xl md:text-3xl font-bold text-gray-800">Bookio</h1>
+                    <h1 className="font-caveat text-2xl md:text-3xl font-bold text-gray-800">BOOKLY</h1>
                 </div>
 
                 {/* Dynamic Link Sections */}

@@ -1,5 +1,4 @@
 import { Link } from "react-router";
-import { FaPlus } from "react-icons/fa";
 import MainContainer from "@/layouts/MainContainer";
 import { useGetAllBooksQuery } from "@/redux/api/baseApi";
 import { BounceLoader } from "react-spinners";
@@ -11,6 +10,7 @@ import AddBookModal from "@/elements/modals/AddBookModal";
 import { closeAddBookModal, openAddBookModal } from "@/redux/features/modalState/modalState";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import type { RootState } from "@/redux/store";
+import { CircleFadingPlus } from "lucide-react";
 
 export default function AddBookPage() {
     const dispatch = useAppDispatch();
@@ -33,7 +33,7 @@ export default function AddBookPage() {
     return (
         <MainContainer>
             <div
-                className="relative h-[40vh] sm:h-[50vh] md:h-[60vh] xl:h-[70vh] bg-[url('/Banner2.jpg')] bg-fixed bg-center bg-cover flex items-center justify-center rounded-xl overflow-hidden mb-10"
+                className="relative h-[40vh] sm:h-[50vh] md:h-[60vh] xl:h-[70vh] bg-[url('/banner.jpeg')] bg-fixed bg-center bg-cover flex items-center justify-center rounded-xl overflow-hidden mb-10"
             >
                 <div className="absolute inset-0 bg-black/50" />
                 <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4 z-10">
@@ -47,7 +47,7 @@ export default function AddBookPage() {
                     <Dialog open={open} onOpenChange={(val) => !val && dispatch(closeAddBookModal())}>
                         <DialogTrigger asChild>
                             <button onClick={() => dispatch(openAddBookModal())} className="text-sm md:text-lg flex items-center gap-2 px-3 py-3 bg-main hover:bg-purple-800 transition rounded-lg text-white font-semibold shadow-lg">
-                                <FaPlus />
+                                <CircleFadingPlus />
                                 Add Book
                             </button>
                         </DialogTrigger>

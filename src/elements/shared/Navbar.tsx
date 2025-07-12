@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router";
 import { useState } from "react";
-import { HiMenu, HiX } from "react-icons/hi";
+import { HiMenu } from "react-icons/hi";
+import { HiX } from "react-icons/hi";
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,10 +26,10 @@ export default function Navbar() {
                     <div className="flex items-center gap-4">
                         <img
                             className="h-12 w-12 md:h-16 md:w-16 rounded-full object-cover"
-                            src="/logo.jpg"
+                            src="/book-logo.jpeg"
                             alt="Logo"
                         />
-                        <h1 className=" font-meddon text-xl md:text-3xl font-bold text-gray-800">Bookio</h1>
+                        <h1 className=" font-caveat text-xl md:text-3xl font-bold text-gray-800">BOOKLY</h1>
                     </div>
                 </Link>
 
@@ -51,7 +52,7 @@ export default function Navbar() {
                 </div>
 
                 <button onClick={toggleMenu} className="md:hidden text-3xl text-gray-700">
-                    {isMenuOpen ? <HiX /> : <HiMenu />}
+                    {isMenuOpen ? <HiX/> : <HiMenu />}
                 </button>
             </div>
 
@@ -80,7 +81,7 @@ export default function Navbar() {
                     </Link>
 
                     <button onClick={closeMenu} className="text-2xl text-gray-700">
-                        <HiX />
+                        <HiX/>
                     </button>
 
                 </div>
