@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const bookApi = createApi({
     reducerPath: "baseApi",
-    baseQuery: fetchBaseQuery({ baseUrl: "https://b5-a4-backend-sazid.vercel.app/api" }),
+    baseQuery: fetchBaseQuery({ baseUrl: " https://b5-a4-library-managment-backend-1.onrender.com/api" }),
     tagTypes: ["Book"],
     endpoints: (builder) => ({
         getAllBooks: builder.query({
